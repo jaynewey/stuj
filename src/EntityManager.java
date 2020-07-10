@@ -31,10 +31,12 @@ public class EntityManager {
         return new HashSet<>();
     }
 
-    public void addComponentToEntity (Entity entity, Component component) {
-        Class<? extends Component> componentType = component.getClass();
-        components.putIfAbsent(componentType, new HashMap<>(Map.of(entity, component)));
-        entities.get(entity).putIfAbsent(componentType, component);
+    public void addComponentToEntity (Entity entity, Component... components) {
+        for (Component component: components) {
+            Class<? extends Component> componentType = component.getClass();
+            this.components.putIfAbsent(componentType, new HashMap<>(Map.of(entity, component)));
+            entities.get(entity).putIfAbsent(componentType, component);
+        }
     }
 
     public void removeComponentFromEntity (Entity entity, Class<? extends Component> componentType) {
