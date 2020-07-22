@@ -37,12 +37,15 @@ public class EntityManager {
             Class<? extends Component> componentType = component.getClass();
             this.components.putIfAbsent(componentType, new HashMap<>(Map.of(entity, component)));
             entities.get(entity).putIfAbsent(componentType, component);
+            // update all relevant families
+            updateFamiliesWithComponentType(componentType);
         }
     }
 
     public void removeComponentFromEntity (Entity entity, Class<? extends Component> componentType) {
         components.get(componentType).remove(entity);
         entities.get(entity).remove(componentType);
+        updateFamiliesWithComponentType(componentType);
     }
 
     public HashMap<Entity, Component> getComponentMap (Class<? extends Component> componentType) {
@@ -72,6 +75,26 @@ public class EntityManager {
         Family family = new Family(entities);
         families.put(componentTypes, family);
         return family;
+    }
+
+    private void updateFamily(HashSet<Class<? extends Component>> componentTypes) {
+        HashSet<Entity> entities = new HashSet<>();
+        for (Class<? extends Component> componentType: componentTypes) {
+            if (entities.isEmpty()) {
+                entities.addAll(components.get(componentType).keySet());
+            } else {
+                entities.retainAll(components.get(componentType).keySet());
+            };
+        }
+        families.get(componentTypes).setEntities(entities);
+    }
+
+    private void updateFamiliesWithComponentType(Class<? extends Component> componentType) {
+        for (HashSet<Class<? extends Component>> family: families.keySet()) {
+            if (family.contains(componentType)) {
+                updateFamily(family);
+            }
+        }
     }
 
     public void update(float deltatime) {
