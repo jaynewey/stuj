@@ -77,6 +77,11 @@ public class EntityManager {
         return family;
     }
 
+    @SafeVarargs
+    public final Family getFamily(Class<? extends Component>... componentTypes) {
+        return getFamily(new HashSet<>(Arrays.asList(componentTypes)));
+    }
+
     private void updateFamily(HashSet<Class<? extends Component>> componentTypes) {
         HashSet<Entity> entities = new HashSet<>();
         for (Class<? extends Component> componentType: componentTypes) {
