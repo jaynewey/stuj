@@ -17,9 +17,9 @@ Stuj is an Entity Component System framework written in Java. It aims to provide
 * [EntitySystem](#entitysystem)
     + [IteratorSystem](#iteratorsystem)
 
-## Usage
+# Usage
 
-### Entity
+## Entity
 
 Entities are are Universally Unique Identifiers (UUIDs) and nothing else. Entities can be instantiated directly and then added to the manager:
 
