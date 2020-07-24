@@ -7,6 +7,15 @@
 
 Stuj is an Entity Component System framework written in Java. It aims to provide a similar interface to [stup](https://github.com/jaynewey/stup-ecs), an Entity Component System Framework written in Python.
 
+# Contents
+
+* [Entity](#entity)
+* [EntityManager](#entitymanager)
+    + [deltatime](#deltatime)
+* [Component](#component)
+    + [Adding and Removing Components](#adding-and-removing-components)
+* [EntitySystem](#entitysystem)
+    + [IteratorSystem](#iteratorsystem)
 
 ## Usage
 
@@ -73,8 +82,8 @@ entityManager.removeComponentFromEntity(entity, PositionComponent.class)
 
 Notice that you must provide a `Component` instance when adding a component but only need provide a `Component` type when removing one.
 
-## System
-Systems are for processing specific sets of entities. You should inherit the `System` class when writing systems. The `update()` method of your system is called every tick and should perform your logic, usually iterating through a `Family`. A `Family` is essentially a set of `Entity` instances and should be assigned in the constructor.  
+## EntitySystem
+Systems are for processing specific sets of entities. You should inherit the `EntitySystem` class when writing systems. The `update()` method of your system is called every tick and should perform your logic, usually iterating through a `Family`. A `Family` is essentially a set of `Entity` instances and should be assigned in the constructor.  
 Usually in a System you want to only perform logic on entities that have a specific Component type or set of Component types. For example, a movement system might only affect entities that have a position component and a velocity component, we use families to hold these for us, and we can obtain a `Family` of entities by using `getFamily` from an `EntityManager` instance.
 Then, you would want to work with the components of the entities, so use `EntityManager`'s `getComponentMap()` to get all components of a type so you can access a `Component` by using an `Entity` as the key.  
 Here's how it might look:
