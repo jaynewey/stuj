@@ -16,6 +16,7 @@ Stuj is an Entity Component System framework written in Java. It aims to provide
     + [Adding and Removing Components](#adding-and-removing-components)
 * [EntitySystem](#entitysystem)
     + [IteratorSystem](#iteratorsystem)
+* [EntityListener](#entitylistener)
 
 # Usage
 
@@ -159,4 +160,44 @@ public class MovementSystem extends IteratorSystem {
         position.y += velocity.y * deltatime;
     }
 }
+```
+
+## EntityListener
+
+Entity listeners can be registered with an `EntityManager` instance. Listeners get notified whenever an entity is added or removed from the manager. This is useful if you want to do something upon one of those events.
+
+To write your own listener, implement the `EntityListener` interface. You must override `entityAdded` and `entityRemoved` but any that aren't required may not be implemented.
+
+For the purpose of example the following class will print the entity object when it is removed from the manager.
+
+```java
+import java.util.HashMap;
+
+public class PrintListener implements EntityListener {
+
+    @Override
+    public void entityAdded(Entity entity) {}
+
+    @Override
+    public void entityRemoved(Entity entity, HashMap<Class<? extends Component>, Component> components) {
+        System.out.println(entity.toString());
+    }
+}
+```
+
+`entityAdded` takes the added entity as a parameter, whereas `entityRemoved` additionally takes the components that were attached to the entity in the system so that you can utilise them in your listener.
+
+Currently, you must `import java.util.HashMap;` as `EntityRemoved` takes a `HashMap` as a parameter. This might be tweaked in future.
+
+You must register a listener with an `ÈntityManager` instance for it to function. You can do so like this:
+
+```java
+EntityManager entityManager = new EntityManager()
+PrintListener printListener = new PrintListener()
+entityManager.addListener(printListener)
+```
+
+You can removed listeners from the manager, too:
+```java
+entityManager.removeListener(printListener)
 ```
