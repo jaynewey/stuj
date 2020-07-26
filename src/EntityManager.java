@@ -112,6 +112,20 @@ public class EntityManager {
         }
     }
 
+    public void addListener(EntityListener listener) {
+        /*
+        Adds a given Listener instance to the Entity Manager.
+         */
+        listeners.add(listener);
+    }
+
+    public void removeListener(EntityListener listener) {
+        /*
+        Removes a given Listener instance from the Entity Manager.
+         */
+        listeners.remove(listener);
+    }
+
     public void update(float deltatime) {
         for (EntitySystem system: systems) {
             system.update(deltatime);
