@@ -26,6 +26,7 @@ public class EntityManager {
         if (!entities.containsKey(entity)) {
             entities.put(entity, new HashMap<>());
         }
+        listeners.forEach((listener) -> listener.entityAdded(entity));
         return entity;
     }
 
@@ -37,7 +38,7 @@ public class EntityManager {
                 updateFamiliesWithComponentType(componentType);
             }
         }
-        entities.remove(entity);
+        listeners.forEach((listener) -> listener.entityRemoved(entity, entities.remove(entity)));
         return removedComponents;
     }
 
