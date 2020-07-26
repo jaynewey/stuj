@@ -5,6 +5,7 @@ public class EntityManager {
     private HashMap<Entity, HashMap<Class<? extends Component>, Component>> entities = new HashMap<>();
     private HashMap<HashSet<Class<? extends Component>>, Family> families = new HashMap<>();
     private LinkedList<EntitySystem> systems = new LinkedList<>();
+    private LinkedList<EntityListener> listeners = new LinkedList<>();
 
     public EntityManager () {
     }
@@ -25,11 +26,20 @@ public class EntityManager {
         if (!entities.containsKey(entity)) {
             entities.put(entity, new HashMap<>());
         }
+        listeners.forEach((listener) -> listener.entityAdded(entity));
         return entity;
     }
 
     public HashSet<Component> removeEntity (Entity entity) {
-        return new HashSet<>();
+        HashSet<Component> removedComponents = new HashSet<>();
+        for (Class<? extends Component> componentType: components.keySet()) {
+            if (components.get(componentType).containsKey(entity)) {
+                removedComponents.add(components.get(componentType).remove(entity));
+                updateFamiliesWithComponentType(componentType);
+            }
+        }
+        listeners.forEach((listener) -> listener.entityRemoved(entity, entities.remove(entity)));
+        return removedComponents;
     }
 
     public void addComponentToEntity (Entity entity, Component... components) {
@@ -100,6 +110,20 @@ public class EntityManager {
                 updateFamily(family);
             }
         }
+    }
+
+    public void addListener(EntityListener listener) {
+        /*
+        Adds a given Listener instance to the Entity Manager.
+         */
+        listeners.add(listener);
+    }
+
+    public void removeListener(EntityListener listener) {
+        /*
+        Removes a given Listener instance from the Entity Manager.
+         */
+        listeners.remove(listener);
     }
 
     public void update(float deltatime) {
