@@ -5,6 +5,7 @@ public class EntityManager {
     private HashMap<Entity, HashMap<Class<? extends Component>, Component>> entities = new HashMap<>();
     private HashMap<HashSet<Class<? extends Component>>, Family> families = new HashMap<>();
     private LinkedList<EntitySystem> systems = new LinkedList<>();
+    private LinkedList<EntityListener> listeners = new LinkedList<>();
 
     public EntityManager () {
     }
@@ -29,7 +30,15 @@ public class EntityManager {
     }
 
     public HashSet<Component> removeEntity (Entity entity) {
-        return new HashSet<>();
+        HashSet<Component> removedComponents = new HashSet<>();
+        for (Class<? extends Component> componentType: components.keySet()) {
+            if (components.get(componentType).containsKey(entity)) {
+                removedComponents.add(components.get(componentType).remove(entity));
+                updateFamiliesWithComponentType(componentType);
+            }
+        }
+        entities.remove(entity);
+        return removedComponents;
     }
 
     public void addComponentToEntity (Entity entity, Component... components) {
