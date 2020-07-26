@@ -192,12 +192,12 @@ Currently, you must `import java.util.HashMap;` as `EntityRemoved` takes a `Hash
 You must register a listener with an `ÈntityManager` instance for it to function. You can do so like this:
 
 ```java
-EntityManager entityManager = new EntityManager()
-PrintListener printListener = new PrintListener()
-entityManager.addListener(printListener)
+EntityManager entityManager = new EntityManager();
+PrintListener printListener = new PrintListener();
+entityManager.addListener(printListener);
 ```
 
 You can removed listeners from the manager, too:
 ```java
-entityManager.removeListener(printListener)
+entityManager.removeListener(printListener);
 ```
