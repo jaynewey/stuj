@@ -1,5 +1,7 @@
-public abstract class EntityListener {
-    public abstract void entityAdded();
+import java.util.HashMap;
 
-    public abstract void entityRemoved();
+public interface EntityListener {
+    void entityAdded(Entity entity);
+
+    void entityRemoved(Entity entity, HashMap<Class<? extends Component>, Component> components);
 }
