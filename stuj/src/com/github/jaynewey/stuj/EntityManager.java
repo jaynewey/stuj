@@ -54,6 +54,15 @@ public class EntityManager {
     }
 
     /**
+     * Returns True if the given Entity instance is in the entity manager, False if not.
+     * @param entity The Entity instance to be checked.
+     * @return A boolean representing whether the Entity was found or not.
+     */
+    public boolean entityExists(Entity entity) {
+        return entities.containsKey(entity);
+    }
+
+    /**
      * Applies given Component instances to a given com.jaynewey.stuj.Entity instance.
      * @param entity The com.jaynewey.stuj.Entity to have components added to.
      * @param components The Component instances to be added to the entity.
