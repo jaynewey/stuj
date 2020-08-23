@@ -16,17 +16,17 @@ public class EntityManager {
     }
 
     /**
-     * Creates a new com.jaynewey.stuj.Entity instance, adds it to the manager and returns it.
-     * @return A new com.jaynewey.stuj.Entity instance that has been added to the manager
+     * Creates a new Entity instance, adds it to the manager and returns it.
+     * @return A new Entity instance that has been added to the manager
      */
     public Entity createEntity () {
         return addEntity(new Entity());
     }
 
     /**
-     * Adds an existing com.jaynewey.stuj.Entity instance to the manager and returns it.
-     * @param entity The com.jaynewey.stuj.Entity instance to be added
-     * @return The com.jaynewey.stuj.Entity instance that was added
+     * Adds an existing Entity instance to the manager and returns it.
+     * @param entity The Entity instance to be added
+     * @return The Entity instance that was added
      */
     public Entity addEntity (Entity entity) {
         if (!entities.containsKey(entity)) {
@@ -37,8 +37,8 @@ public class EntityManager {
     }
 
     /**
-     * Removes an com.jaynewey.stuj.Entity instance from the com.jaynewey.stuj.Entity Manager.
-     * @param entity The com.jaynewey.stuj.Entity instance to be removed from the com.jaynewey.stuj.Entity Manager.
+     * Removes an Entity instance from the Entity Manager.
+     * @param entity The Entity instance to be removed from the Entity Manager.
      * @return A set containing the removed entity's components
      */
     public HashSet<Component> removeEntity (Entity entity) {
@@ -63,8 +63,8 @@ public class EntityManager {
     }
 
     /**
-     * Applies given Component instances to a given com.jaynewey.stuj.Entity instance.
-     * @param entity The com.jaynewey.stuj.Entity to have components added to.
+     * Applies given Component instances to a given Entity instance.
+     * @param entity The Entity to have components added to.
      * @param components The Component instances to be added to the entity.
      */
     public void addComponentToEntity (Entity entity, Component... components) {
@@ -78,9 +78,9 @@ public class EntityManager {
     }
 
     /**
-     * Removes all Component instances of given Component type from given com.jaynewey.stuj.Entity instance.
-     * @param entity The com.jaynewey.stuj.Entity to have components removed from.
-     * @param componentType The Component type to removed from the com.jaynewey.stuj.Entity.
+     * Removes all Component instances of given Component type from given Entity instance.
+     * @param entity The Entity to have components removed from.
+     * @param componentType The Component type to removed from the Entity.
      */
     public void removeComponentFromEntity (Entity entity, Class<? extends Component> componentType) {
         components.get(componentType).remove(entity);
@@ -89,35 +89,35 @@ public class EntityManager {
     }
 
     /**
-     * Returns map of key value pairs where com.jaynewey.stuj.Entity instances are the key and Component instances are the
+     * Returns map of key value pairs where Entity instances are the key and Component instances are the
      * values and the Component instances are of the given Component type.
      * @param componentType The type of Component
-     * @return A HashMap of com.jaynewey.stuj.Entity instances to their Component instances.
+     * @return A HashMap of Entity instances to their Component instances.
      */
     public HashMap<Entity, Component> getComponentMap (Class<? extends Component> componentType) {
         return components.get(componentType);
     }
 
     /**
-     * Adds given System instances to the com.jaynewey.stuj.Entity Manager.
-     * @param system The System instance to add to the com.jaynewey.stuj.Entity Manager.
+     * Adds given System instances to the Entity Manager.
+     * @param system The System instance to add to the Entity Manager.
      */
     public void addSystem(EntitySystem system) {
         systems.add(system);
     }
 
     /**
-     * Removes given System instance from the com.jaynewey.stuj.Entity Manager.
-     * @param system The System instance to remove from the com.jaynewey.stuj.Entity Manager.
+     * Removes given System instance from the Entity Manager.
+     * @param system The System instance to remove from the Entity Manager.
      */
     public void removeSystem(EntitySystem system) {
         systems.remove(system);
     }
 
     /**
-     * Returns the com.jaynewey.stuj.Family of entities that have all of the given Component types.
-     * @param componentTypes A Set of Component types that you want the com.jaynewey.stuj.Family for.
-     * @return The com.jaynewey.stuj.Family of entities that have all of the requested Component types.
+     * Returns the Family of entities that have all of the given Component types.
+     * @param componentTypes A Set of Component types that you want the Family for.
+     * @return The Family of entities that have all of the requested Component types.
      */
     public Family getFamily(HashSet<Class<? extends Component>> componentTypes) {
         if (families.containsKey(componentTypes)) {
@@ -137,9 +137,9 @@ public class EntityManager {
     }
 
     /**
-     * Returns the com.jaynewey.stuj.Family of entities that have all of the given Component types.
-     * @param componentTypes A list of Component types that you want the com.jaynewey.stuj.Family for.
-     * @return The com.jaynewey.stuj.Family of entities that have all of the requested Component types.
+     * Returns the Family of entities that have all of the given Component types.
+     * @param componentTypes A list of Component types that you want the Family for.
+     * @return The Family of entities that have all of the requested Component types.
      */
     @SafeVarargs
     public final Family getFamily(Class<? extends Component>... componentTypes) {
@@ -167,16 +167,16 @@ public class EntityManager {
     }
 
     /**
-     * Adds a given com.jaynewey.stuj.EntityListener instance to the com.jaynewey.stuj.Entity Manager.
-     * @param listener The com.jaynewey.stuj.EntityListener instance to add to the com.jaynewey.stuj.Entity Manager.
+     * Adds a given EntityListener instance to the Entity Manager.
+     * @param listener The EntityListener instance to add to the Entity Manager.
      */
     public void addListener(EntityListener listener) {
         listeners.add(listener);
     }
 
     /**
-     * Removes a given com.jaynewey.stuj.EntityListener instance from the com.jaynewey.stuj.Entity Manager.
-     * @param listener The com.jaynewey.stuj.EntityListener instance to remove from the com.jaynewey.stuj.Entity Manager.
+     * Removes a given EntityListener instance from the Entity Manager.
+     * @param listener The EntityListener instance to remove from the Entity Manager.
      */
     public void removeListener(EntityListener listener) {
         listeners.remove(listener);

@@ -14,8 +14,8 @@ public class Family implements Iterable<Entity> {
     }
 
     /**
-     * Sets the entities belonging to the com.jaynewey.stuj.Family.
-     * @param entities  A set of com.jaynewey.stuj.Entity instances.
+     * Sets the entities belonging to the Family.
+     * @param entities  A set of Entity instances.
      */
     public void setEntities(HashSet<Entity> entities) {
         this.entities = entities;

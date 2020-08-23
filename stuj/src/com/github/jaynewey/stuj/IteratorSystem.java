@@ -18,7 +18,7 @@ public abstract class IteratorSystem extends EntitySystem {
     /**
      * The method that performs logic on an entity and its components.
      * @param deltatime Time between frames. Can be used for framerate independence.
-     * @param entity The com.jaynewey.stuj.Entity instance that is being processed.
+     * @param entity The Entity instance that is being processed.
      */
     public abstract void process(float deltatime, Entity entity);
 }

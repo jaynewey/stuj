@@ -3,7 +3,7 @@ package com.github.jaynewey.stuj;
 import java.util.HashMap;
 
 /**
- * Interface to listen to events broadcast by an com.jaynewey.stuj.EntityManager.
+ * Interface to listen to events broadcast by an EntityManager.
  */
 public interface EntityListener {
     /**

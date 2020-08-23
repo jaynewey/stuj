@@ -1,7 +1,7 @@
 package com.github.jaynewey.stuj;
 
 /**
- * Abstract class for processing com.jaynewey.stuj.Entity instances.
+ * Abstract class for processing Entity instances.
  */
 public abstract class EntitySystem {
     public Family family;
