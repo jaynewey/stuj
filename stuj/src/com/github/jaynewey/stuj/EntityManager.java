@@ -104,6 +104,8 @@ public class EntityManager {
      */
     public void addSystem(EntitySystem system) {
         systems.add(system);
+        systems.sort(Comparator.comparingInt(EntitySystem::getPriority).reversed());
+        System.out.println(systems);
     }
 
     /**
