@@ -127,6 +127,30 @@ Systems can also be removed dynamically:
 entityManager.removeSystem(movementSystem);
 ```
 
+### System Priority
+
+You may want to run systems in a given order, or prioritise some systems over others.
+
+You can enable this behaviour when overriding the `System` constructor. Systems have a priority of 0 by default. This means that when not specified, systems have the lowest possible priority, and are executed in the order they're added to the manager.
+
+Interact with this how you choose. But, for example, if you want to mimic the default constructor, and take a dynamic priority parameter:
+
+```java
+public class MovementSystem extends EntitySystem {
+    HashMap<Entity, Component> positionComponentMap;
+    HashMap<Entity, Component> velocityComponentMap;
+
+    public MovementSystem (EntityManager entityManager, int priority) {
+        super(priority);
+        // ...
+    }
+}
+```
+
+You can then instantiate your system with a given priority, `MovementSystem movementSystem = new MovementSystem(1)`
+
+Systems with a higher priority will be executed first by the `EntityManager`.
+
 ### IteratorSystem
 
 Most systems will involve iterating over a `Family`. To avoid redundant code, stup-ecs provides a handy utility class which will do this for you, called `IteratorSystem`.
