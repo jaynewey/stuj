@@ -15,6 +15,7 @@ Stuj is an Entity Component System framework written in Java. It aims to provide
 * [Component](#component)
     + [Adding and Removing Components](#adding-and-removing-components)
 * [EntitySystem](#entitysystem)
+    + [System Priority](#system-priority)
     + [IteratorSystem](#iteratorsystem)
 * [EntityListener](#entitylistener)
 
