@@ -132,7 +132,7 @@ entityManager.removeSystem(movementSystem);
 
 You may want to run systems in a given order, or prioritise some systems over others.
 
-You can enable this behaviour when overriding the `System` constructor. Systems have a priority of 0 by default. This means that when not specified, systems have the lowest possible priority, and are executed in the order they're added to the manager.
+You can enable this behaviour when overriding the `EntitySystem` constructor. Systems have a priority of 0 by default. This means that when not specified, systems have the lowest possible priority, and are executed in the order they're added to the manager.
 
 Interact with this how you choose. But, for example, if you want to mimic the default constructor, and take a dynamic priority parameter:
 
